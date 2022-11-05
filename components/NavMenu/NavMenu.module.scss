@@ -1,0 +1,73 @@
+// animation
+@keyframes slideInRight {
+    from {transform: translateX(100%);}
+    to {transform: translateX(0);}
+}
+
+@keyframes rotateInTop {
+    0% {
+        transform: rotateX(-90deg)
+    }
+    70% {
+        transform: rotateX(20deg) 
+    }
+    100% {
+        transform: rotateX(0deg) 
+    }
+}
+
+.container {
+    // animation
+    animation: slideInRight 0.3s linear;
+
+    // colors
+    background-color: var(--background-color-primary);
+
+    // sizes
+    padding: 0.5rem;
+
+    // position
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+
+    // flex box settings
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.closeBtn {
+    place-self: end;
+    border: none;
+}
+
+.listItem {
+    margin: 1rem 3rem;
+}
+
+@media screen and (min-width: 1224px) {
+    .container {
+        animation: rotateInTop 400ms ease-in-out forwards;
+        transform-origin: top center;
+
+        position: absolute;
+        top: auto;
+        left: auto;
+        right: 60px;
+        bottom: auto;
+
+        padding: 1rem;
+
+        box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.5);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+  }
