@@ -1,0 +1,91 @@
+---
+import chevron_left from "../svgs/chevron-left.svg";
+import chevron_right from "../svgs/chevron-right.svg";
+---
+
+<script>
+    import Alpine from "alpinejs";
+
+    document.addEventListener("alpine:init", () => {
+        Alpine.data("carousel", () => ({
+            // init gives us access to this,
+            // which gives us access to $refs
+            // so that we can set the initial values
+            // for num_children and children
+            init() {
+                this.num_children = this.$refs.track.children.length;
+                this.chidlren = Array.from(this.$refs.track.children);
+            },
+            curr_slide_idx: 0,
+            num_children: 0,
+            chidlren: [] as Element[],
+            get curr_slide() {
+                return this.chidlren[this.curr_slide_idx];
+            },
+            handle_left_click() {
+                if (this.curr_slide_idx === 0) {
+                    this.curr_slide_idx = this.num_children - 1;
+                } else {
+                    this.curr_slide_idx--;
+                }
+            },
+            handle_right_click() {
+                this.curr_slide_idx =
+                    (this.curr_slide_idx + 1) % this.num_children;
+            },
+        }));
+    });
+</script>
+
+<div x-data="carousel" class="carousel">
+    <ul x-ref="track" class="carousel-track">
+        <slot />
+    </ul>
+    <button @click="handle_left_click" class="left arrow">
+        <img
+            src={chevron_left.src}
+            width={chevron_left.width}
+            height={chevron_left.height}
+        />
+    </button>
+    <button @click="handle_right_click" class="right arrow">
+        <img
+            src={chevron_right.src}
+            width={chevron_right.width}
+            height={chevron_right.height}
+        />
+    </button>
+</div>
+
+<style>
+    .carousel {
+        width: 100%;
+        display: grid;
+        grid-template-rows: [row1-start] 1fr [row1-end];
+        grid-template-columns: [left-start] auto [left-end main-start] 1fr [main-end right-start] auto [right-end];
+        place-items: center;
+        border-radius: var(--border-radius-small);
+    }
+
+    .carousel-track {
+        grid-column: main;
+        grid-row: row1;
+        border-radius: var(--border-radius-small);
+    }
+
+    .arrow {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .left {
+        grid-column: left;
+        grid-row: row1;
+    }
+
+    .right {
+        grid-column: right;
+        grid-row: row1;
+    }
+</style>

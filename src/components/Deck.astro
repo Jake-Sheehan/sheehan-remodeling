@@ -1,0 +1,142 @@
+---
+import Card from "./Card.astro";
+
+type CardType = {
+    title: string;
+    href: string;
+    body: string;
+    image_url: string;
+};
+
+interface Props {
+    cards: CardType[];
+    bg_image: string;
+}
+
+const { cards, bg_image } = Astro.props;
+---
+
+<script>
+    function set_bg(element: HTMLElement, url: string) {
+        element.style.background = `url(${url}), var(--primary)`;
+        element.style.backgroundBlendMode = "overlay";
+        element.style.backgroundSize = "cover";
+        element.style.backgroundPosition = "center center";
+        element.style.backgroundRepeat = "no-repeat";
+    }
+
+    function setup() {
+        const deck = document.getElementById("deck");
+        // no deck then return
+        if (!deck) {
+            console.log("error: deck element not found");
+            return;
+        }
+        const cards = Array.from(document.getElementsByClassName("list-item"));
+        // no cards then return
+        if (cards.length < 1) {
+            console.log("error: no cards found");
+            return;
+        }
+
+        const first_bg = deck.dataset.bgImage;
+        // no image then return
+        if (!first_bg) {
+            console.log("error: no background image found");
+            return;
+        }
+
+        cards.forEach((card) => {
+            card.addEventListener("mouseover", (event) => {
+                const url = (event.currentTarget as HTMLElement).dataset.image;
+                if (!url) {
+                    console.log("event listener error: no image url");
+                    return;
+                }
+                set_bg(deck, url);
+            });
+        });
+
+        deck.addEventListener("mouseout", (event) => {
+            set_bg(event.currentTarget as HTMLElement, first_bg);
+        });
+
+        set_bg(deck, first_bg);
+    }
+
+    setup();
+</script>
+
+<ul id="deck" data-bg-image={bg_image}>
+    {
+        cards.map((card) => {
+            return (
+                <li class="list-item" data-image={card.image_url}>
+                    <Card title={card.title} theme="dark" />
+                    <a class="link" href={card.href}>
+                        learn more
+                    </a>
+                </li>
+            );
+        })
+    }
+</ul>
+
+<style>
+    ul {
+        background-color: var(--primary);
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: stretch;
+        min-height: 500px;
+    }
+
+    li {
+        flex-basis: 100%;
+        flex-grow: 1;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: safe center;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    li:not(:last-child) {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .body {
+        max-width: 80ch;
+        color: var(--font-light);
+    }
+
+    .link {
+        color: var(--font-light);
+        font-size: 1rem;
+        padding: 20px;
+        background: transparent;
+        text-transform: uppercase;
+        border: 2px solid var(--font-light);
+    }
+
+    @media only screen and (min-width: 1200px) {
+        li {
+            flex-basis: 33.333%;
+        }
+
+        li:hover > .link {
+            display: block;
+        }
+
+        li:not(:last-child) {
+            border-right: 1px solid lightgray;
+            border-bottom: none;
+        }
+
+        .link {
+            display: none;
+        }
+    }
+</style>
