@@ -1,0 +1,22 @@
+---
+interface Props {
+    href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a href={href}>learn more</a>
+
+<style>
+    a {
+        color: var(--primary-light);
+        font-weight: bold;
+        border: 1px solid var(--primary-light);
+        background: transparent;
+        padding: 1.5rem;
+        text-transform: capitalize;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+</style>

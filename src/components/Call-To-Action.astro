@@ -1,0 +1,95 @@
+---
+import type { EntryFieldTypes } from "contentful";
+import { contentful_client } from "../lib/contentful";
+
+interface Props {
+    contentful_id: string;
+}
+
+const { contentful_id } = Astro.props;
+
+interface CallToActionSkeleton {
+    contentTypeId: "callToAction";
+    fields: {
+        callToActionSlogan: EntryFieldTypes.Text;
+        callToActionText: EntryFieldTypes.Text;
+        callToActionButtonText: EntryFieldTypes.Text;
+        callToActionImage: EntryFieldTypes.AssetLink;
+    };
+}
+
+const data =
+    await contentful_client.withoutUnresolvableLinks.getEntry<CallToActionSkeleton>(
+        contentful_id,
+    );
+const slogan = data.fields.callToActionSlogan;
+const text = data.fields.callToActionText;
+const button_text = data.fields.callToActionButtonText;
+const image_url = `https:${data.fields.callToActionImage?.fields.file?.url ?? "//picsum.photos/1920/1080"}`;
+const formatted_image_url = `url(${image_url})`;
+---
+
+<section id="call-to-action" class="full-width">
+    <div class="container"><h1 class="slogan">{slogan}</h1></div>
+    <div class="container">
+        <p class="text">{text}</p>
+        <a class="button" href="contact">{button_text}</a>
+    </div>
+</section>
+
+<style define:vars={{ formatted_image_url }}>
+    #call-to-action {
+        color: var(--font-light);
+        min-height: 50dvh;
+        background-color: var(--primary);
+        background: var(--formatted_image_url), var(--primary);
+        background-blend-mode: overlay;
+        background-size: cover;
+        background-position: 50% 50%;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+
+    .slogan {
+        font-family: "Black Ops One", system-ui;
+        font-size: 3rem;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .text {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+
+    .button {
+        color: var(--primary);
+        background-color: var(--highlight);
+        padding: 16px;
+        text-transform: uppercase;
+        font-weight: bold;
+        border-radius: var(--border-radius-small);
+    }
+
+    @media only screen and (min-width: 1200px) {
+        #call-to-action {
+            flex-flow: row wrap;
+            gap: 2%;
+        }
+
+        .container {
+            flex-basis: 49%;
+        }
+    }
+</style>

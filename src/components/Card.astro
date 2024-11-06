@@ -1,46 +1,42 @@
 ---
+import LearnMoreButton from "./Learn-More-Button.astro";
+
 interface Props {
     title: string;
-    theme: "light" | "dark";
+    img_url: string;
+    link: string;
 }
 
-const { title, theme } = Astro.props;
+const { title, img_url, link } = Astro.props;
 ---
 
-<article class={`product-card ${theme === "light" ? "light" : "dark"}`}>
+<li x-data=`{ imgUrl: "${img_url}" }` @mouseover="bgUrl = imgUrl">
     <h2>{title}</h2>
     <slot />
-</article>
+    <LearnMoreButton href={link} />
+</li>
 
 <style>
-    .product-card {
-        padding: 2.5rem;
+    li {
+        min-height: 500px;
+        color: var(--font-light);
+        padding: 2rem;
         display: flex;
         flex-flow: column nowrap;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
     }
 
-    .product-card > h2 {
-        text-align: center;
-        text-decoration: underline;
-        text-decoration-color: var(--highlight);
-        text-decoration-thickness: 5px;
-        text-transform: uppercase;
-        pointer-events: none;
+    li > :global(a) {
+        opacity: 0;
+        transition: opacity 250ms linear;
     }
 
-    .light {
-        color: var(--font-dark);
+    li:hover > :global(a) {
+        opacity: 1;
     }
 
-    .dark {
-        color: var(--font-light);
-    }
-
-    @media only screen and (min-width: 1200px) {
-        .product-card {
-            justify-content: center;
-        }
+    h2 {
+        text-transform: capitalize;
     }
 </style>

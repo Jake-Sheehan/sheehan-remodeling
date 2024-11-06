@@ -1,142 +1,85 @@
 ---
 import Card from "./Card.astro";
-
-type CardType = {
-    title: string;
-    href: string;
-    body: string;
-    image_url: string;
-};
+import { contentful_client } from "../lib/contentful";
+import type { EntryFieldTypes } from "contentful";
 
 interface Props {
-    cards: CardType[];
-    bg_image: string;
+    contentful_id: string;
 }
 
-const { cards, bg_image } = Astro.props;
+interface CardSkeleton {
+    contentTypeId: "serviceCard";
+    fields: {
+        title: EntryFieldTypes.Text;
+        cardImage: EntryFieldTypes.AssetLink;
+        link: EntryFieldTypes.Text;
+    };
+}
+
+interface DeckSeleton {
+    contentTypeId: "serviceDeck";
+    fields: {
+        defaultImage: EntryFieldTypes.AssetLink;
+        cards: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<CardSkeleton>>;
+    };
+}
+const { contentful_id } = Astro.props;
+
+const data =
+    await contentful_client.withoutUnresolvableLinks.getEntry<DeckSeleton>(
+        contentful_id,
+    );
+
+const { defaultImage, cards } = data.fields;
+const img_url = `https:${defaultImage?.fields.file?.url ?? "//picsum.photos/1920/1080"}`;
 ---
 
-<script>
-    function set_bg(element: HTMLElement, url: string) {
-        element.style.background = `url(${url}), var(--primary)`;
-        element.style.backgroundBlendMode = "overlay";
-        element.style.backgroundSize = "cover";
-        element.style.backgroundPosition = "center center";
-        element.style.backgroundRepeat = "no-repeat";
-    }
-
-    function setup() {
-        const deck = document.getElementById("deck");
-        // no deck then return
-        if (!deck) {
-            console.log("error: deck element not found");
-            return;
+<section id="deck" class="full-width">
+    <ul
+        x-data=`{ bgUrl: "${img_url}"}`
+        @mouseleave=`bgUrl = "${img_url}"`
+        :style="`background: url(${bgUrl}), var(--primary); background-size: cover; background-repeat: no-repeat; background-position: 50% 50%;`"
+    >
+        {
+            cards.map((card) => {
+                return (
+                    <Card
+                        title={card?.fields.title ?? "title"}
+                        img_url={
+                            card?.fields.cardImage?.fields?.file?.url ??
+                            "picsum.photos/1920/1080"
+                        }
+                        link={card?.fields.link ?? "/"}
+                    />
+                );
+            })
         }
-        const cards = Array.from(document.getElementsByClassName("list-item"));
-        // no cards then return
-        if (cards.length < 1) {
-            console.log("error: no cards found");
-            return;
-        }
-
-        const first_bg = deck.dataset.bgImage;
-        // no image then return
-        if (!first_bg) {
-            console.log("error: no background image found");
-            return;
-        }
-
-        cards.forEach((card) => {
-            card.addEventListener("mouseover", (event) => {
-                const url = (event.currentTarget as HTMLElement).dataset.image;
-                if (!url) {
-                    console.log("event listener error: no image url");
-                    return;
-                }
-                set_bg(deck, url);
-            });
-        });
-
-        deck.addEventListener("mouseout", (event) => {
-            set_bg(event.currentTarget as HTMLElement, first_bg);
-        });
-
-        set_bg(deck, first_bg);
-    }
-
-    setup();
-</script>
-
-<ul id="deck" data-bg-image={bg_image}>
-    {
-        cards.map((card) => {
-            return (
-                <li class="list-item" data-image={card.image_url}>
-                    <Card title={card.title} theme="dark" />
-                    <a class="link" href={card.href}>
-                        learn more
-                    </a>
-                </li>
-            );
-        })
-    }
-</ul>
+    </ul>
+</section>
 
 <style>
     ul {
-        background-color: var(--primary);
         width: 100%;
         display: flex;
         flex-flow: row wrap;
-        justify-content: center;
-        align-items: stretch;
-        min-height: 500px;
+        background-blend-mode: overlay;
     }
 
-    li {
+    ul > :global(li) {
         flex-basis: 100%;
-        flex-grow: 1;
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: safe center;
-        align-items: center;
-        padding: 2rem;
     }
 
-    li:not(:last-child) {
-        border-bottom: 1px solid lightgray;
-    }
-
-    .body {
-        max-width: 80ch;
-        color: var(--font-light);
-    }
-
-    .link {
-        color: var(--font-light);
-        font-size: 1rem;
-        padding: 20px;
-        background: transparent;
-        text-transform: uppercase;
-        border: 2px solid var(--font-light);
+    ul > :global(li) {
+        border-bottom: 1px solid var(--primary-light);
     }
 
     @media only screen and (min-width: 1200px) {
-        li {
-            flex-basis: 33.333%;
+        ul > :global(li) {
+            flex-basis: 33.33333%;
         }
 
-        li:hover > .link {
-            display: block;
-        }
-
-        li:not(:last-child) {
-            border-right: 1px solid lightgray;
-            border-bottom: none;
-        }
-
-        .link {
-            display: none;
+        ul > :global(li:not(:nth-child(3n))) {
+            border-right: 1px solid var(--primary-light);
         }
     }
 </style>
