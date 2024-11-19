@@ -45,18 +45,24 @@ const { links } = Astro.props;
         position: absolute;
         top: 100%;
         right: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         background: var(--primary-light);
-        padding: 2rem;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 0.5rem;
         visibility: hidden;
         transition: visibility 1ms;
+        border-top: 2px solid var(--primary);
     }
 
     ul {
+        width: 100%;
         display: flex;
         flex-flow: column nowrap;
         justify-content: flex-start;
-        align-items: flex-start;
+        align-items: center;
         gap: 0.5rem;
     }
 
@@ -64,7 +70,6 @@ const { links } = Astro.props;
         text-transform: uppercase;
         font-size: 1.5rem;
         padding: 0.5rem;
-        width: 100%;
         border-radius: 5px;
     }
 
@@ -83,6 +88,12 @@ const { links } = Astro.props;
         button {
             width: 48px;
             height: 48px;
+        }
+
+        ul {
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
         }
     }
 </style>

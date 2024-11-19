@@ -1,0 +1,26 @@
+---
+import GitHubLogo from "./GitHubLogo.astro";
+---
+
+<footer>
+    <p>&copy; 2024 Sheehan Remodeling</p>
+    <p>
+        Design and Build by Jake Sheehan <a
+            target="_blank"
+            href="https://github.com/Jake-Sheehan"><GitHubLogo /></a
+        >
+    </p>
+</footer>
+
+<style>
+    footer {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background: var(--primary);
+        color: var(--font-light);
+        grid-row: footer;
+    }
+</style>

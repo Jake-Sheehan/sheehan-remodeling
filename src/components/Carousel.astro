@@ -1,6 +1,6 @@
 ---
-import chevron_left from "../svgs/chevron-left.svg";
-import chevron_right from "../svgs/chevron-right.svg";
+import ChevronLeft from "./Chevron-Left.astro";
+import ChevronRight from "./Chevron-Right.astro";
 ---
 
 <script>
@@ -42,18 +42,10 @@ import chevron_right from "../svgs/chevron-right.svg";
         <slot />
     </ul>
     <button @click="handle_left_click" class="left arrow">
-        <img
-            src={chevron_left.src}
-            width={chevron_left.width}
-            height={chevron_left.height}
-        />
+        <ChevronLeft />
     </button>
     <button @click="handle_right_click" class="right arrow">
-        <img
-            src={chevron_right.src}
-            width={chevron_right.width}
-            height={chevron_right.height}
-        />
+        <ChevronRight />
     </button>
 </div>
 
@@ -65,6 +57,11 @@ import chevron_right from "../svgs/chevron-right.svg";
         grid-template-columns: [left-start] auto [left-end main-start] 1fr [main-end right-start] auto [right-end];
         place-items: center;
         border-radius: var(--border-radius-small);
+    }
+
+    button {
+        width: 64px;
+        height: 64px;
     }
 
     .carousel-track {

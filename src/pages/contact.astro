@@ -40,27 +40,30 @@ const { name, phone, email } = data.fields;
     }
 
     dl {
-        display: grid;
-        grid-template-columns: [title-start] 1fr [title-end data-start] 1fr [data-end];
-        grid-template-rows: [phone-start] auto [phone-end email-start] auto [email-end];
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1%;
         font-size: 1.2rem;
+    }
+
+    dd,
+    dt {
+        flex-basis: 100%;
     }
 
     dt {
         text-transform: capitalize;
         font-weight: bold;
-        grid-column: title;
     }
 
-    dd {
-        grid-column: data;
-    }
+    @media only screen and (min-width: 1200px) {
+        dl {
+            flex-flow: row wrap;
+        }
 
-    .phone {
-        grid-row: phone;
-    }
-
-    .email {
-        grid-row: email;
+        dd,
+        dt {
+            flex-basis: 49%;
+        }
     }
 </style>
