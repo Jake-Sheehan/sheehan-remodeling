@@ -1,34 +1,15 @@
 ---
-import Dropdown from "../components/Dropdown.astro";
-import type { NavLink } from "../components/Dropdown.astro";
 import "@fontsource/black-ops-one";
 // Supports weights 100-900
 import "@fontsource-variable/montserrat";
 import "@fontsource/indie-flower";
+import Header from "../components/Header.astro";
+
 interface Props {
     title: string;
 }
 
 const { title } = Astro.props;
-
-const nav_links: NavLink[] = [
-    {
-        label: "home",
-        href: "/",
-    },
-    {
-        label: "about",
-        href: "about",
-    },
-    {
-        label: "services",
-        href: "services",
-    },
-    {
-        label: "contact",
-        href: "contact",
-    },
-];
 ---
 
 <!doctype html>
@@ -42,13 +23,7 @@ const nav_links: NavLink[] = [
         <title>{title}</title>
     </head>
     <body>
-        <header>
-            <a href="/">
-                <img src="logo.svg" alt="logo" width={160} height="{160}" />
-            </a>
-            <h2>781-927-8069 | Braintree, MA 02184</h2>
-            <Dropdown links={nav_links} />
-        </header>
+        <Header />
         <main class="content-grid">
             <slot />
         </main>
@@ -70,10 +45,6 @@ const nav_links: NavLink[] = [
             auto [footer-end];
     }
 
-    header {
-        grid-row: header;
-    }
-
     main {
         grid-row: main;
     }
@@ -81,18 +52,6 @@ const nav_links: NavLink[] = [
     footer {
         grid-row: footer;
         text-align: center;
-    }
-
-    header {
-        color: var(--font-dark);
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 1rem 2rem;
-        background-color: var(--primary-light);
-        position: relative;
     }
 
     footer {
@@ -174,13 +133,13 @@ const nav_links: NavLink[] = [
 
     html,
     body {
-        background-color: var(--primary-light);
+        background-color: var(--primary);
     }
 
     body {
         font-family: "Montserrat Variable", sans-serif;
         hanging-punctuation: first last;
-        color: var(--font-dark);
+        color: var(--font-light);
         width: 100%;
         min-height: 100dvh;
     }
@@ -560,5 +519,9 @@ const nav_links: NavLink[] = [
     a {
         text-decoration: none;
         color: inherit;
+    }
+
+    p {
+        text-align: justify;
     }
 </style>

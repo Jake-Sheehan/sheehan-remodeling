@@ -27,16 +27,18 @@ const { title, img_url, link } = Astro.props;
         align-items: center;
     }
 
-    li > :global(a) {
-        opacity: 0;
-        transition: opacity 250ms linear;
-    }
-
-    li:hover > :global(a) {
-        opacity: 1;
-    }
-
     h2 {
         text-transform: capitalize;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        li > :global(a) {
+            opacity: 0;
+            transition: opacity 250ms linear;
+        }
+
+        li:hover > :global(a) {
+            opacity: 1;
+        }
     }
 </style>

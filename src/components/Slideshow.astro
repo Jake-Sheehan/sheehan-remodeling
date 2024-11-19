@@ -1,0 +1,60 @@
+---
+import type { EntryFieldTypes } from "contentful";
+import { contentful_client } from "../lib/contentful";
+import Carousel from "./Carousel.astro";
+import CarouselItem from "./Carousel-Item.astro";
+
+interface Props {
+    contentful_id: string;
+}
+
+interface SlideshowSkeleton {
+    contentTypeId: "slideshow";
+    fields: {
+        title: EntryFieldTypes.Text;
+        description: EntryFieldTypes.Text;
+        images: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+    };
+}
+
+const { contentful_id } = Astro.props;
+const data =
+    await contentful_client.withoutUnresolvableLinks.getEntry<SlideshowSkeleton>(
+        contentful_id,
+    );
+const { title, description, images } = data.fields;
+---
+
+<section>
+    <h2>{title}</h2>
+    <Carousel>
+        {
+            images.map((image) => (
+                <CarouselItem>
+                    <img
+                        src={image?.fields.file?.url ?? ""}
+                        alt={
+                            image?.fields.description ??
+                            "slideshow image default"
+                        }
+                    />
+                </CarouselItem>
+            ))
+        }
+    </Carousel>
+    <p>{description}</p>
+</section>
+
+<style>
+    section {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--primary);
+        color: var(--font-light);
+    }
+
+    h2 {
+        text-align: center;
+        text-transform: capitalize;
+    }
+</style>

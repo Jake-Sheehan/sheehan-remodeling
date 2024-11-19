@@ -36,16 +36,17 @@ const { links } = Astro.props;
     button {
         border: none;
         background: transparent;
-        width: 36px;
+        width: 64px;
+        height: 64px;
     }
 
     .nav {
         z-index: 100;
         position: absolute;
+        top: 100%;
+        right: 0;
         background: var(--primary-light);
         padding: 2rem;
-        right: 0;
-        top: 100%;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         visibility: hidden;
         transition: visibility 1ms;
@@ -76,5 +77,12 @@ const { links } = Astro.props;
 
     .dropdown[aria-expanded="true"] > .nav {
         visibility: visible;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        button {
+            width: 48px;
+            height: 48px;
+        }
     }
 </style>

@@ -1,0 +1,58 @@
+---
+import type { NavLink } from "../components/Dropdown.astro";
+import Dropdown from "../components/Dropdown.astro";
+
+const nav_links: NavLink[] = [
+    {
+        label: "home",
+        href: "/",
+    },
+    {
+        label: "about",
+        href: "about",
+    },
+    {
+        label: "services",
+        href: "services",
+    },
+    {
+        label: "contact",
+        href: "contact",
+    },
+];
+---
+
+<header>
+    <a href="/">
+        <img src="logo.svg" alt="logo" width={160} height="{160}" />
+    </a>
+
+    <h2>781-927-8069 | Braintree, MA</h2>
+
+    <Dropdown links={nav_links} />
+</header>
+
+<style>
+    header {
+        color: var(--font-dark);
+        grid-row: header;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 2rem;
+        background-color: var(--primary-light);
+        position: relative;
+    }
+
+    h2 {
+        display: none;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        h2 {
+            display: block;
+        }
+    }
+</style>

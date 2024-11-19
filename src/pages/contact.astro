@@ -1,41 +1,66 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageBanner from "../components/Page-Banner.astro";
+import type { EntryFieldTypes } from "contentful";
+import { contentful_client } from "../lib/contentful";
+
+interface ContactUsSkeleton {
+    contentTypeId: "contactInfo";
+    fields: {
+        name: EntryFieldTypes.Text;
+        phone: EntryFieldTypes.Text;
+        email: EntryFieldTypes.Text;
+    };
+}
+
+const data = await contentful_client.getEntry<ContactUsSkeleton>(
+    import.meta.env.CONTACT_US_ENTRY_ID,
+);
+
+const { name, phone, email } = data.fields;
 ---
 
 <Layout title="Contact">
     <section id="contact">
-        <h2>Contact Us</h2>
+        <PageBanner title="contact us" />
         <dl>
-            <dt>phone</dt>
-            <dd>781-927-8069</dd>
-            <dt>email</dt>
-            <dd>jake@sheehanremodeling.net</dd>
+            <dt class="phone">call {name} at:</dt>
+            <dd class="phone">{phone}</dd>
+            <dt class="email">email:</dt>
+            <dd class="email">{email}</dd>
         </dl>
     </section>
 </Layout>
 
 <style>
-    #contact {
-        max-width: 80ch;
-        margin: 0 auto;
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem 0;
-    }
-
-    h2 {
-        text-align: center;
-        font-family: "Indie Flower", cursive;
-        font-size: 3rem;
+    dl,
+    dt,
+    dd {
+        margin: 0;
     }
 
     dl {
-        margin: 0;
+        display: grid;
+        grid-template-columns: [title-start] 1fr [title-end data-start] 1fr [data-end];
+        grid-template-rows: [phone-start] auto [phone-end email-start] auto [email-end];
+        font-size: 1.2rem;
+    }
+
+    dt {
+        text-transform: capitalize;
+        font-weight: bold;
+        grid-column: title;
     }
 
     dd {
-        margin: 0;
+        grid-column: data;
+    }
+
+    .phone {
+        grid-row: phone;
+    }
+
+    .email {
+        grid-row: email;
     }
 </style>

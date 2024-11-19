@@ -1,0 +1,68 @@
+---
+import type { EntryFieldTypes } from "contentful";
+import { contentful_client } from "../lib/contentful";
+import Guarantee from "./Guarantee.astro";
+
+interface Props {
+    contentful_id: string;
+}
+
+interface GuaranteeSkeleton {
+    contentTypeId: "guarantee";
+    fields: {
+        title: EntryFieldTypes.Text;
+        description: EntryFieldTypes.Text;
+    };
+}
+
+interface GuaranteeSectionSkeleton {
+    contentTypeId: "guaranteeSection";
+    fields: {
+        guarantees: EntryFieldTypes.Array<
+            EntryFieldTypes.EntryLink<GuaranteeSkeleton>
+        >;
+    };
+}
+
+const { contentful_id } = Astro.props;
+
+const data =
+    await contentful_client.withoutUnresolvableLinks.getEntry<GuaranteeSectionSkeleton>(
+        contentful_id,
+    );
+
+const { guarantees } = data.fields;
+---
+
+<section id="guarantees">
+    <div class="container">
+        {
+            guarantees.map((guarantee) => (
+                <Guarantee
+                    title={guarantee?.fields.title ?? "title"}
+                    description={guarantee?.fields.description ?? "description"}
+                />
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    #guarantees {
+        margin: 3rem 0;
+    }
+
+    .container {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2%;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        .container {
+            flex-flow: row wrap;
+        }
+    }
+</style>

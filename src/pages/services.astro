@@ -1,125 +1,32 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Carousel from "../components/Carousel.astro";
-import CarouselItem from "../components/Carousel-Item.astro";
-
-const images = [
-    { url: "https://picsum.photos/1920/1080?random=1", alt: "service" },
-    { url: "https://picsum.photos/1920/1080?random=2", alt: "service" },
-    { url: "https://picsum.photos/1920/1080?random=3", alt: "service" },
-    { url: "https://picsum.photos/1920/1080?random=4", alt: "service" },
-    { url: "https://picsum.photos/1920/1080?random=5", alt: "service" },
-    { url: "https://picsum.photos/1920/1080?random=6", alt: "service" },
-    { url: "https://picsum.photos/1920/1080?random=7", alt: "service" },
-];
+import PageBanner from "../components/Page-Banner.astro";
+import Slideshow from "../components/Slideshow.astro";
 ---
 
 <Layout title="Services">
-    <section id="new-homes" class="full-width content-grid">
-        <h2>new homes</h2>
-
-        <div class="breakout">
-            <Carousel>
-                <CarouselItem>
-                    <img src={images[0].url} alt="temp" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src={images[1].url} alt="temp" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src={images[3].url} alt="temp" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src={images[4].url} alt="temp" />
-                </CarouselItem>
-            </Carousel>
-        </div>
-
-        <p>
-            Lorem ipsum odor amet, consectetuer adipiscing elit. Habitant
-            laoreet tempor vel pellentesque dictumst fames mus. Eget malesuada
-            sit tempus ipsum, velit mus. Potenti consequat aliquet class felis
-            ullamcorper libero. Vel magnis congue quis odio tempor. Vivamus mus
-            pretium tempor fermentum aliquam justo. Curabitur fames amet vel
-            lobortis ante, praesent posuere. Phasellus cras erat habitasse;
-            tempor conubia bibendum.
-        </p>
-    </section>
-
-    <section id="additions" class="full-width content-grid">
-        <h2>additions</h2>
-
-        <div class="breakout">
-            <Carousel>
-                <CarouselItem>
-                    <img src={images[0].url} alt="temp" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src={images[1].url} alt="temp" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src={images[3].url} alt="temp" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src={images[4].url} alt="temp" />
-                </CarouselItem>
-            </Carousel>
-        </div>
-
-        <p>
-            Lorem ipsum odor amet, consectetuer adipiscing elit. Habitant
-            laoreet tempor vel pellentesque dictumst fames mus. Eget malesuada
-            sit tempus ipsum, velit mus. Potenti consequat aliquet class felis
-            ullamcorper libero. Vel magnis congue quis odio tempor. Vivamus mus
-            pretium tempor fermentum aliquam justo. Curabitur fames amet vel
-            lobortis ante, praesent posuere. Phasellus cras erat habitasse;
-            tempor conubia bibendum.
-        </p>
-    </section>
-
-    <section id="remodels" class="full-width content-grid">
-        <h2>remodels</h2>
-
-        <div class="breakout">
-            <Carousel>
-                <CarouselItem>
-                    <img src={images[0].url} alt="temp" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src={images[1].url} alt="temp" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src={images[3].url} alt="temp" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src={images[4].url} alt="temp" />
-                </CarouselItem>
-            </Carousel>
-        </div>
-
-        <p>
-            Lorem ipsum odor amet, consectetuer adipiscing elit. Habitant
-            laoreet tempor vel pellentesque dictumst fames mus. Eget malesuada
-            sit tempus ipsum, velit mus. Potenti consequat aliquet class felis
-            ullamcorper libero. Vel magnis congue quis odio tempor. Vivamus mus
-            pretium tempor fermentum aliquam justo. Curabitur fames amet vel
-            lobortis ante, praesent posuere. Phasellus cras erat habitasse;
-            tempor conubia bibendum.
-        </p>
+    <div><PageBanner title="services" /></div>
+    <section class="slideshows">
+        <Slideshow
+            contentful_id={import.meta.env.NEW_HOMES_SLIDESHOW_ENTRY_ID}
+        />
+        <Slideshow
+            contentful_id={import.meta.env.ADDITIONS_SLIDESHOW_ENTRY_ID}
+        />
+        <Slideshow
+            contentful_id={import.meta.env.REMODELS_SLIDESHOW_ENTRY_ID}
+        />
     </section>
 </Layout>
 
 <style>
-    section {
-        padding: 1rem;
+    .slideshows {
+        grid-column: full-width;
     }
 
-    h2 {
-        text-align: center;
-        text-transform: capitalize;
-    }
-
-    p {
-        text-align: justify;
+    @media only screen and (min-width: 1200px) {
+        .slideshows {
+            grid-column: breakout;
+        }
     }
 </style>

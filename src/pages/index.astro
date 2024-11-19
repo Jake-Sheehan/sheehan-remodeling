@@ -3,11 +3,13 @@
 import Layout from "../layouts/Layout.astro";
 import Deck from "../components/Deck.astro";
 import CallToAction from "../components/Call-To-Action.astro";
-import Guarantee from "../components/Guarantee.astro";
+import GuaranteeSection from "../components/Guarantee-Section.astro";
 ---
 
 <Layout title="Sheehan Remodeling">
     <CallToAction contentful_id={import.meta.env.CALL_TO_ACTION_ENTRY_ID} />
-    <Guarantee />
+    <GuaranteeSection
+        contentful_id={import.meta.env.GUARANTEE_SECTION_ENTRY_ID}
+    />
     <Deck contentful_id={import.meta.env.SERVICE_DECK_ENTRY_ID} />
 </Layout>
