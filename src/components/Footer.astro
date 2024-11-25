@@ -15,12 +15,32 @@ import GitHubLogo from "./GitHubLogo.astro";
 <style>
     footer {
         display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
         align-items: center;
-        padding: 1rem;
+        padding: 0.5rem;
         background: var(--primary);
-        color: var(--font-light);
+        color: var(--font-muted);
         grid-row: footer;
+    }
+
+    a {
+        display: inline-block;
+        margin: 0.25rem;
+        width: var(--github-logo-size);
+        height: var(--github-logo-size);
+    }
+
+    p {
+        margin: 0;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        footer {
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
     }
 </style>

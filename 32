@@ -24,7 +24,7 @@ const nav_links: NavLink[] = [
 
 <header>
     <a href="/">
-        <img src="logo.svg" alt="logo" />
+        <img src="logo.svg" alt="logo" width={90} height="{20}" />
     </a>
 
     <Dropdown links={nav_links} />
@@ -38,18 +38,9 @@ const nav_links: NavLink[] = [
         flex-flow: row nowrap;
         align-items: center;
         justify-content: space-between;
-        padding: 0.75rem 2rem;
+        padding: 1rem 2rem;
         background-color: var(--primary-light);
         position: relative;
-    }
-
-    img {
-        width: 100%;
-    }
-
-    a {
-        width: var(--logo-width);
-        height: var(--logo-height);
     }
 
     h2 {
