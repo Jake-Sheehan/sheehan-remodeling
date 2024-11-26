@@ -20,6 +20,11 @@ const { title, description } = Astro.props;
 <style>
     article {
         flex-basis: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25em;
     }
 
     h2 {
@@ -28,6 +33,11 @@ const { title, description } = Astro.props;
 
     p {
         text-align: justify;
+    }
+
+    h2,
+    p {
+        margin: 0;
     }
 
     @media only screen and (min-width: 1200px) {
