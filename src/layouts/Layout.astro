@@ -3,6 +3,8 @@ import "@fontsource/black-ops-one";
 // Supports weights 100-900
 import "@fontsource-variable/montserrat";
 import "@fontsource/indie-flower";
+// Supports weights 200-700
+import "@fontsource-variable/oswald";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -137,7 +139,7 @@ const { title } = Astro.props;
         display: none !important;
     }
 
-    /* Font sizes */
+    /* Font options */
 
     body {
         font-size: var(--fs-400);
@@ -145,6 +147,7 @@ const { title } = Astro.props;
 
     h1 {
         font-size: var(--fs-xl, 4rem);
+        font-family: "Black Ops One", system-ui;
     }
 
     h2 {
@@ -153,6 +156,10 @@ const { title } = Astro.props;
 
     h3 {
         font-size: var(--fs-500);
+    }
+
+    a {
+        font-family: "Oswald Variable", sans-serif;
     }
 
     footer {
