@@ -31,13 +31,15 @@ const { title, description, images } = data.fields;
         {
             images.map((image) => (
                 <CarouselItem>
-                    <img
-                        src={image?.fields.file?.url ?? ""}
-                        alt={
-                            image?.fields.description ??
-                            "slideshow image default"
-                        }
-                    />
+                    <a href={image?.fields.file?.url ?? ""} target="_blank">
+                        <img
+                            src={image?.fields.file?.url ?? ""}
+                            alt={
+                                image?.fields.description ??
+                                "slideshow image default"
+                            }
+                        />
+                    </a>
                 </CarouselItem>
             ))
         }
@@ -48,7 +50,6 @@ const { title, description, images } = data.fields;
 <style>
     section {
         width: 100%;
-        padding: 1rem;
         background-color: var(--primary);
         color: var(--font-light);
     }
@@ -56,5 +57,13 @@ const { title, description, images } = data.fields;
     h2 {
         text-align: center;
         text-transform: capitalize;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    a {
+        display: block;
     }
 </style>
