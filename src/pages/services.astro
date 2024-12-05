@@ -6,7 +6,7 @@ import Slideshow from "../components/Slideshow.astro";
 
 <Layout title="Services">
     <div><PageBanner title="services" /></div>
-    <section class="slideshows">
+    <section class="breakout">
         <Slideshow
             contentful_id={import.meta.env.NEW_HOMES_SLIDESHOW_ENTRY_ID}
         />
@@ -18,15 +18,3 @@ import Slideshow from "../components/Slideshow.astro";
         />
     </section>
 </Layout>
-
-<style>
-    .slideshows {
-        grid-column: full-width;
-    }
-
-    @media only screen and (min-width: 1200px) {
-        .slideshows {
-            grid-column: breakout;
-        }
-    }
-</style>

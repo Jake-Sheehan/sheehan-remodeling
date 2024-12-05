@@ -34,7 +34,7 @@ const data =
 const { guarantees } = data.fields;
 ---
 
-<section id="guarantees">
+<section id="guarantees" class="full-width content-grid">
     <div class="container">
         {
             guarantees.map((guarantee) => (
@@ -49,7 +49,9 @@ const { guarantees } = data.fields;
 
 <style>
     #guarantees {
-        margin: 3rem 0;
+        padding: 3rem 0;
+        background-color: var(--primary);
+        color: var(--font-light);
     }
 
     .container {
