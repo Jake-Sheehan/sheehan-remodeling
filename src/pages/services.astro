@@ -7,14 +7,20 @@ import Slideshow from "../components/Slideshow.astro";
 <Layout title="Services">
     <div><PageBanner title="services" /></div>
     <section class="breakout">
-        <Slideshow
-            contentful_id={import.meta.env.NEW_HOMES_SLIDESHOW_ENTRY_ID}
-        />
-        <Slideshow
-            contentful_id={import.meta.env.ADDITIONS_SLIDESHOW_ENTRY_ID}
-        />
-        <Slideshow
-            contentful_id={import.meta.env.REMODELS_SLIDESHOW_ENTRY_ID}
-        />
+        <div id="new-homes">
+            <Slideshow
+                contentful_id={import.meta.env.NEW_HOMES_SLIDESHOW_ENTRY_ID}
+            />
+        </div>
+        <div id="additions">
+            <Slideshow
+                contentful_id={import.meta.env.ADDITIONS_SLIDESHOW_ENTRY_ID}
+            />
+        </div>
+        <div id="remodels">
+            <Slideshow
+                contentful_id={import.meta.env.REMODELS_SLIDESHOW_ENTRY_ID}
+            />
+        </div>
     </section>
 </Layout>

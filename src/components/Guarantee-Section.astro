@@ -35,7 +35,7 @@ const { guarantees } = data.fields;
 ---
 
 <section id="guarantees" class="full-width content-grid">
-    <div class="container">
+    <div class="container breakout">
         {
             guarantees.map((guarantee) => (
                 <Guarantee
@@ -62,10 +62,19 @@ const { guarantees } = data.fields;
         gap: 1.5rem;
     }
 
+    .container > :global(*) {
+        flex-basis: 100%;
+    }
+
     @media only screen and (min-width: 1200px) {
         .container {
             flex-flow: row wrap;
-            gap: 0;
+            align-items: flex-start;
+            gap: 4%;
+        }
+
+        .container > :global(*) {
+            flex-basis: 48%;
         }
     }
 </style>
