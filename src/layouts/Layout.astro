@@ -49,15 +49,51 @@ const { title } = Astro.props;
 </style>
 
 <style is:global>
+    @font-face {
+        font-family: "Aileron";
+        src: url("/fonts/Aileron-Black.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: "Aileron Thin";
+        src: url("/fonts/Aileron-Thin.otf") format("opentype");
+        font-weight: lighter;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: "Aileron Ultra Light";
+        src: url("/fonts/Aileron-UltraLight.otf") format("opentype");
+        font-weight: lighter;
+        font-style: normal;
+    }
+
     :root {
+        /*
         --primary: #1b1e25;
         --primary-light: #f4f6f1;
         --font-light: #f4f6f1;
         --font-dark: #0c1017;
-        --font-muted: #808080;
         --highlight: #fcc200;
+              */
+
+        --font-muted: #808080;
         --border-radius-big: 10px;
         --border-radius-small: 5px;
+        --primary: #1b1e25;
+        --color-tertiary: #e16162;
+        --color-background: #eff0f3;
+        --color-headline: #0d0d0d;
+        --color-headline-light: #fffffe;
+        --color-paragraph: #2a2a2a;
+        --color-paragraph-light: #eff0f3;
+        --color-border: #0d0d0d;
+        --color-border-light: #eff0f3;
+        --color-button: #ff8e3c;
+        --color-button-text: #0d0d0d;
+        --color-highlight: #ff8e3c;
 
         /* allows auto transitions */
         interpolate-size: allow-keywords;
@@ -74,7 +110,7 @@ const { title } = Astro.props;
         /*
          * font sizes
          * */
-        --fs-xl: 2.5rem;
+        --fs-xl: 4rem;
         --fs-600: 1.5rem;
         --fs-500: 1.25rem;
         --fs-400: 1rem;
@@ -84,7 +120,7 @@ const { title } = Astro.props;
     @media only screen and (min-width: 1200px) {
         :root {
             /* font sizes */
-            --fs-xl: 3.5rem;
+            --fs-xl: 5rem;
             --fs-600: 2rem;
             --fs-500: 1.5rem;
             --fs-400: 1.25rem;
@@ -147,8 +183,18 @@ const { title } = Astro.props;
     }
 
     h1 {
-        font-size: var(--fs-xl, 4rem);
+        font-size: var(--fs-xl);
+        font-family: "Aileron Thin", sans-serif;
+        font-weight: normal;
+        letter-spacing: 0.1em;
+        line-height: 1;
+    }
+
+    h2,
+    h3 {
         font-family: "Oswald Variable", sans-serif;
+        font-weight: normal;
+        text-transform: capitalize;
     }
 
     h2 {
@@ -167,22 +213,34 @@ const { title } = Astro.props;
         font-size: var(--fs-small);
     }
 
+    /* Colors */
+
+    html,
+    body {
+        background-color: var(--color-background);
+        color: var(--color-paragraph);
+    }
+
+    h1,
+    h2,
+    h3 {
+        color: var(--color-headline);
+    }
+
+    button,
+    .button {
+        background-color: var(--color-button);
+        color: var(--color-button-text);
+    }
+
     /* Universals */
 
     html {
-        font-family: system-ui, sans-serif;
         min-height: 100dvh;
         box-sizing: border-box;
     }
 
-    html,
     body {
-        background-color: var(--primary-light);
-    }
-
-    body {
-        hanging-punctuation: first last;
-        color: var(--font);
         width: 100%;
         min-height: 100dvh;
     }
@@ -241,7 +299,7 @@ const { title } = Astro.props;
  */
 
     h1 {
-        margin: 0.67em 0;
+        margin: 0.5rem 0;
     }
 
     /* Grouping content
@@ -564,6 +622,6 @@ const { title } = Astro.props;
     }
 
     p {
-        text-align: justify;
+        text-align: left;
     }
 </style>

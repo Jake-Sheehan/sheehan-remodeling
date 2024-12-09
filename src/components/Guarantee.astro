@@ -11,7 +11,7 @@ const { title, description } = Astro.props;
 
 <article>
     <h2>
-        <CheckMark />
+        <span><CheckMark /></span>
         {title}
     </h2>
     <p>{description}</p>
@@ -23,16 +23,17 @@ const { title, description } = Astro.props;
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         gap: 0.25em;
     }
 
-    h2 {
-        text-transform: uppercase;
+    span {
+        margin-right: 0.5rem;
     }
 
-    p {
-        text-align: justify;
+    h2 {
+        text-transform: capitalize;
+        color: var(--color-headline-dark);
     }
 
     h2,
@@ -40,9 +41,18 @@ const { title, description } = Astro.props;
         margin: 0;
     }
 
+    p {
+        color: var(--color-paragraph-dark);
+    }
+
     @media only screen and (min-width: 1200px) {
         article {
             flex-basis: 49%;
+            align-items: center;
+        }
+
+        p {
+            text-align: justify;
         }
     }
 </style>

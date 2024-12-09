@@ -50,11 +50,11 @@ const { links } = Astro.props;
         justify-content: center;
         align-items: center;
         text-align: center;
-        background: var(--primary-light);
+        background: var(--color-background);
         padding: 0.5rem;
         visibility: hidden;
         transition: visibility 1ms;
-        border-top: 2px solid var(--primary);
+        border-top: 2px solid var(--color-border);
     }
 
     ul {
@@ -69,10 +69,11 @@ const { links } = Astro.props;
     li {
         text-transform: uppercase;
         padding: 0.5rem;
+        color: var(--color-button-text);
     }
 
     li:hover {
-        background: var(--primary);
+        background: var(--color-button);
         color: var(--font-light);
     }
 

@@ -39,9 +39,7 @@ const formatted_image_url = `url(${image_url})`;
 
 <style define:vars={{ formatted_image_url }}>
     #call-to-action {
-        color: var(--font-light);
-        min-height: 50dvh;
-        background-color: var(--primary);
+        min-height: 75dvh;
         background: var(--formatted_image_url), var(--primary);
         background-blend-mode: overlay;
         background-size: cover;
@@ -65,15 +63,30 @@ const formatted_image_url = `url(${image_url})`;
         text-transform: uppercase;
         text-align: center;
         font-family: "Black Ops One", system-ui;
+        color: var(--color-headline-light);
+    }
+
+    p {
+        color: var(--color-paragraph-light);
     }
 
     .button {
-        color: var(--primary);
-        background-color: var(--highlight);
         padding: 0.5rem;
         text-transform: uppercase;
         font-weight: bold;
         border-radius: var(--border-radius-small);
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.7);
+        transition: 200ms;
+    }
+
+    .button:hover {
+        scale: 1.05;
+        box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .button:active {
+        scale: 0.95;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
     }
 
     @media only screen and (min-width: 1200px) {

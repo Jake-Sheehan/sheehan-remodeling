@@ -19,7 +19,6 @@ const { title, img_url, link } = Astro.props;
 <style>
     li {
         min-height: var(--card-height);
-        color: var(--font-light);
         padding: 2rem;
         display: flex;
         flex-flow: column nowrap;
@@ -29,6 +28,7 @@ const { title, img_url, link } = Astro.props;
 
     h2 {
         text-transform: capitalize;
+        color: var(--color-headline-light);
     }
 
     @media only screen and (min-width: 1200px) {

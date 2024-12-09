@@ -23,12 +23,7 @@ const { name, phone, email } = data.fields;
 <Layout title="Contact">
     <section id="contact">
         <PageBanner title="contact us" />
-        <dl>
-            <dt class="phone">call {name} at:</dt>
-            <dd class="phone">{phone}</dd>
-            <dt class="email">email:</dt>
-            <dd class="email">{email}</dd>
-        </dl>
+
         <p>
             We’d love to hear about your project! Whether you’re planning a new
             home, addition, or remodel, our team is here to help bring your
@@ -36,6 +31,13 @@ const { name, phone, email } = data.fields;
             project, and your preferred contact information. We’ll get back to
             you promptly to discuss your needs and schedule a free consultation.
         </p>
+
+        <dl>
+            <dt class="phone">call {name} at:</dt>
+            <dd class="phone">{phone}</dd>
+            <dt class="email">email:</dt>
+            <dd class="email">{email}</dd>
+        </dl>
     </section>
 </Layout>
 
