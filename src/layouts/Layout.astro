@@ -34,7 +34,7 @@ const { title } = Astro.props;
     </body>
 </html>
 
-<style>
+<style is:global>
     body {
         display: grid;
         grid-template-rows:
@@ -125,7 +125,6 @@ const { title } = Astro.props;
             --fs-500: 1.5rem;
             --fs-400: 1.25rem;
             --fs-small: 0.8rem;
-
             /* icon sizes */
             --github-logo-size: 24px;
 
@@ -137,6 +136,14 @@ const { title } = Astro.props;
     /*
      * Grid layout
      * */
+
+    header {
+        grid-row: header;
+    }
+
+    footer {
+        grid-row: footer;
+    }
 
     .content-grid {
         --padding-inline: 2rem;

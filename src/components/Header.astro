@@ -1,6 +1,7 @@
 ---
 import type { NavLink } from "../components/Dropdown.astro";
 import Dropdown from "../components/Dropdown.astro";
+import PhoneIcon from "./Phone-Icon.astro";
 
 const nav_links: NavLink[] = [
     {
@@ -23,11 +24,21 @@ const nav_links: NavLink[] = [
 ---
 
 <header>
-    <a href="/">
-        <img src="logo.svg" alt="logo" />
-    </a>
+    <div class="info-bar">
+        <p>
+            <span class="phone-icon"><PhoneIcon /></span><a
+                href="tel:555-555-5555">555-555-5555</a
+            >
+        </p>
+        <p>Braintree, MA</p>
+    </div>
+    <div class="nav-bar">
+        <a href="/">
+            <img src="logo.svg" alt="logo" />
+        </a>
 
-    <Dropdown links={nav_links} />
+        <Dropdown links={nav_links} />
+    </div>
 </header>
 
 <style>
@@ -35,11 +46,40 @@ const nav_links: NavLink[] = [
         background-color: var(--color-background);
         grid-row: header;
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
         align-items: center;
-        justify-content: space-between;
-        padding: 0.75rem 2rem;
+        justify-content: flex-start;
         position: relative;
+    }
+
+    .info-bar {
+        flex-basis: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-flow: row nowrap;
+        font-size: var(--fs-small);
+        line-height: 1;
+        margin: 0;
+        padding: 0 1rem;
+        background-color: var(--color-tertiary);
+        color: var(--color-paragraph-light);
+        font-weight: bold;
+    }
+
+    .phone-icon {
+        display: inline-block;
+        width: 12px;
+        margin-right: 5px;
+    }
+
+    .nav-bar {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        flex-basis: 100%;
+        padding: 0.5rem 1rem;
     }
 
     img {
@@ -58,6 +98,10 @@ const nav_links: NavLink[] = [
     @media only screen and (min-width: 1200px) {
         h2 {
             display: block;
+        }
+
+        .phone-icon {
+            width: 16px;
         }
     }
 </style>
