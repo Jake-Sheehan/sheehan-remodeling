@@ -22,9 +22,17 @@ const { title, description } = Astro.props;
         flex-basis: 100%;
         display: flex;
         flex-flow: column nowrap;
-        justify-content: center;
-        align-items: flex-start;
+        justify-content: flex-start;
+        align-items: center;
         gap: 0.25em;
+        padding: 1rem;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+        transition: 500ms;
+    }
+
+    article:hover {
+        scale: 1.01;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
     }
 
     span {
@@ -48,11 +56,6 @@ const { title, description } = Astro.props;
     @media only screen and (min-width: 1200px) {
         article {
             flex-basis: 49%;
-            align-items: center;
-        }
-
-        p {
-            text-align: justify;
         }
     }
 </style>
